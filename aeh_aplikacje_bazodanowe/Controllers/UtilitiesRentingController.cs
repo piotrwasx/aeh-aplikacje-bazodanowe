@@ -49,6 +49,36 @@ namespace aeh_aplikacje_bazodanowe.Controllers
             return new JsonResult(table);
         }
 
+        [HttpGet("byUtility")]
+        public JsonResult Get(int id)
+        {
+            string query = @"SELECT *
+                            FROM
+                            dbo.Utility_Renting
+                            WHERE
+                            utility_id = @utility_id
+                            ";
+
+            DataTable table = new DataTable();
+            string sqlDataSource = _configuration.GetConnectionString("AppCon");
+            SqlDataReader myReader;
+            using (SqlConnection myCon = new SqlConnection(sqlDataSource))
+            {
+                myCon.Open();
+                using (SqlCommand myCommand = new SqlCommand(query, myCon))
+                {
+                    myCommand.Parameters.AddWithValue("@utility_id", id);
+
+                    myReader = myCommand.ExecuteReader();
+                    table.Load(myReader);
+                    myReader.Close();
+                    myCon.Close();
+                }
+            }
+
+            return new JsonResult(table);
+        }
+
         [HttpPost]
         public JsonResult Post([FromBody] UtilityRenting utilityRenting)
         {

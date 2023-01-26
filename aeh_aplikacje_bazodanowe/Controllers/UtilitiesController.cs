@@ -27,7 +27,7 @@ namespace aeh_aplikacje_bazodanowe.Controllers
         public JsonResult Get()
         {
             string query = @"
-                            SELECT *
+                            SELECT id, utility_brand, utility_model
                             FROM
                             dbo.Utilities
                             ";
@@ -40,6 +40,36 @@ namespace aeh_aplikacje_bazodanowe.Controllers
                 myCon.Open();
                 using (SqlCommand myCommand = new SqlCommand(query, myCon))
                 {
+                    myReader = myCommand.ExecuteReader();
+                    table.Load(myReader);
+                    myReader.Close();
+                    myCon.Close();
+                }
+            }
+
+            return new JsonResult(table);
+        }
+
+        [HttpGet("{id}")]
+        public JsonResult Get(int id)
+        {
+            string query = @"SELECT *
+                            FROM
+                            dbo.Utilities
+                            WHERE
+                            id = @utility_id
+                            ";
+
+            DataTable table = new DataTable();
+            string sqlDataSource = _configuration.GetConnectionString("AppCon");
+            SqlDataReader myReader;
+            using (SqlConnection myCon = new SqlConnection(sqlDataSource))
+            {
+                myCon.Open();
+                using (SqlCommand myCommand = new SqlCommand(query, myCon))
+                {
+                    myCommand.Parameters.AddWithValue("@utility_id", id);
+
                     myReader = myCommand.ExecuteReader();
                     table.Load(myReader);
                     myReader.Close();
