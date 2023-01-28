@@ -84,14 +84,10 @@ namespace aeh_aplikacje_bazodanowe.Controllers
         [HttpPost]
         public JsonResult Post(Client client)
         {
-            string query = @"INSERT INTO dbo.Clients
-                             (client_name, client_surname, client_address,
-                             client_city, client_phone_nr, client_email,
-                             client_driving_license_since)
-                            VALUES
-                             (@client_name, @client_surname, @client_address,
-                             @client_city, @client_phone_nr, @client_email,
-                             @client_driving_license_since);";
+            string query = @"exec addClient
+                            @name = @client_name, @surname = @client_surname,
+                            @address = @client_address, @city = @client_city, @phone_nr = @client_phone_nr,
+                            @email = @client_email, @driving_license_since = @client_driving_license_since";
 
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("AppCon");
