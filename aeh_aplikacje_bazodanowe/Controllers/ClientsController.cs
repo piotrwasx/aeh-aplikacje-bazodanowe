@@ -82,14 +82,14 @@ namespace aeh_aplikacje_bazodanowe.Controllers
         }
 
         [HttpPost]
-        public JsonResult Post([FromBody] Client client)
+        public JsonResult Post(Client client)
         {
             string query = @"INSERT INTO dbo.Clients
-                             (clinet_name, client_surname, client_address,
+                             (client_name, client_surname, client_address,
                              client_city, client_phone_nr, client_email,
                              client_driving_license_since)
                             VALUES
-                             (@clinet_name, @client_surname, @client_address,
+                             (@client_name, @client_surname, @client_address,
                              @client_city, @client_phone_nr, @client_email,
                              @client_driving_license_since);";
 
@@ -101,7 +101,7 @@ namespace aeh_aplikacje_bazodanowe.Controllers
                 myCon.Open();
                 using (SqlCommand myCommand = new SqlCommand(query, myCon))
                 {
-                    myCommand.Parameters.AddWithValue("@clinet_name", client.clinet_name);
+                    myCommand.Parameters.AddWithValue("@client_name", client.client_name);
                     myCommand.Parameters.AddWithValue("@client_surname", client.client_surname);
                     myCommand.Parameters.AddWithValue("@client_address", client.client_address);
                     myCommand.Parameters.AddWithValue("@client_city", client.client_city);
@@ -172,7 +172,7 @@ namespace aeh_aplikacje_bazodanowe.Controllers
                 using (SqlCommand myCommand = new SqlCommand(query, myCon))
                 {
                     myCommand.Parameters.AddWithValue("@client_id", client.id);
-                    myCommand.Parameters.AddWithValue("@clinet_name", client.clinet_name);
+                    myCommand.Parameters.AddWithValue("@clinet_name", client.client_name);
                     myCommand.Parameters.AddWithValue("@client_surname", client.client_surname);
                     myCommand.Parameters.AddWithValue("@client_address", client.client_address);
                     myCommand.Parameters.AddWithValue("@client_city", client.client_city);
