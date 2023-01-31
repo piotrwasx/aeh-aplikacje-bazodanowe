@@ -148,7 +148,7 @@ namespace aeh_aplikacje_bazodanowe.Controllers
             string query = @"
                            UPDATE dbo.Clients
                            SET
-                            clinet_name = @clinet_name,
+                            client_name = @client_name,
                             client_surname = @client_surname,
                             client_address = @client_address,
                             client_city = @client_city,
@@ -168,7 +168,7 @@ namespace aeh_aplikacje_bazodanowe.Controllers
                 using (SqlCommand myCommand = new SqlCommand(query, myCon))
                 {
                     myCommand.Parameters.AddWithValue("@client_id", client.id);
-                    myCommand.Parameters.AddWithValue("@clinet_name", client.client_name);
+                    myCommand.Parameters.AddWithValue("@client_name", client.client_name);
                     myCommand.Parameters.AddWithValue("@client_surname", client.client_surname);
                     myCommand.Parameters.AddWithValue("@client_address", client.client_address);
                     myCommand.Parameters.AddWithValue("@client_city", client.client_city);

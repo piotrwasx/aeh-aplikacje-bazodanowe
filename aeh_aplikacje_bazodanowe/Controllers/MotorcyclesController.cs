@@ -149,7 +149,7 @@ namespace aeh_aplikacje_bazodanowe.Controllers
         public JsonResult Put(Motorcycle motorcycle)
         {
             string query = @"
-                           UPDATE dbo.Motorcycle
+                           UPDATE dbo.Motorcycles
                            SET
                             motorcycle_brand = @motorcycle_brand,
                             motorcycle_model = @motorcycle_model,
