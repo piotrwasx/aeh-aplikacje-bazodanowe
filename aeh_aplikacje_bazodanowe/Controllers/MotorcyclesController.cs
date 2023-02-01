@@ -116,11 +116,11 @@ namespace aeh_aplikacje_bazodanowe.Controllers
             string query = @"INSERT INTO dbo.Motorcycles
                              (motorcycle_brand, motorcycle_model,
                              motorcycle_year, motorcycle_mileage_km, motorcycle_motor,
-                             motorcycle_body_type, motorcycle_rent_price_pln)
+                             motorcycle_body_type, motorcycle_rent_price_pln, motorcycle_availability)
                             VALUES
                              (@motorcycle_brand, @motorcycle_model,
                              @motorcycle_year, @motorcycle_mileage_km, @motorcycle_motor,
-                             @motorcycle_body_type, @motorcycle_rent_price_pln);";
+                             @motorcycle_body_type, @motorcycle_rent_price_pln, @motorcycle_availability);";
 
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("AppCon");
@@ -137,6 +137,7 @@ namespace aeh_aplikacje_bazodanowe.Controllers
                     myCommand.Parameters.AddWithValue("@motorcycle_motor", motorcycle.motorcycle_motor);
                     myCommand.Parameters.AddWithValue("@motorcycle_body_type", motorcycle.motorcycle_body_type);
                     myCommand.Parameters.AddWithValue("@motorcycle_rent_price_pln", motorcycle.motorcycle_rent_price_pln);
+                    myCommand.Parameters.AddWithValue("@motorcycle_availability", motorcycle.motorcycle_availability);
                     myReader = myCommand.ExecuteReader();
                     table.Load(myReader);
                     myReader.Close();

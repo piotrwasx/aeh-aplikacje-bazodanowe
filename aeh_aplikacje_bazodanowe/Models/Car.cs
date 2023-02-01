@@ -8,9 +8,10 @@ namespace aeh_aplikacje_bazodanowe.Models
         public string car_model { get; set; }
         public int car_year { get; set; }
         public int car_mileage_km { get; set; }
-        public string car_transmisson { get; set; }
+        public string car_transmission { get; set; }
         public string car_motor { get; set; }
         public string car_body_type { get; set; }
         public int car_rent_price_pln { get; set; }
+        public Boolean car_availability { get; set; }
     }
 }

@@ -12,5 +12,6 @@ namespace aeh_aplikacje_bazodanowe.Models
         public string utility_motor { get; set; }
         public string utility_type { get; set; }
         public int utility_rent_price_pln { get; set; }
+        public Boolean utility_availability { get; set; }
     }
 }

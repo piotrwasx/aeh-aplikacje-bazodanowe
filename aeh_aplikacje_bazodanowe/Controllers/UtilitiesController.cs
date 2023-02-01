@@ -115,11 +115,11 @@ namespace aeh_aplikacje_bazodanowe.Controllers
             string query = @"INSERT INTO dbo.Utilities
                              (utility_brand, utility_model, utility_year,
                              utility_mileage_km, utility_transmission, utility_motor,
-                             utility_type, utility_rent_price_pln)
+                             utility_type, utility_rent_price_pln, utility_availability)
                             VALUES
                              (@utility_brand, @utility_model, @utility_year,
                              @utility_mileage_km, @utility_transmission, @utility_motor,
-                             @utility_type, @utility_rent_price_pln);";
+                             @utility_type, @utility_rent_price_pln, @utility_availability);";
 
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("AppCon");
@@ -137,6 +137,7 @@ namespace aeh_aplikacje_bazodanowe.Controllers
                     myCommand.Parameters.AddWithValue("@utility_motor", utility.utility_motor);
                     myCommand.Parameters.AddWithValue("@utility_type", utility.utility_type);
                     myCommand.Parameters.AddWithValue("@utility_rent_price_pln", utility.utility_rent_price_pln);
+                    myCommand.Parameters.AddWithValue("@utility_availability", utility.utility_availability);
                     myReader = myCommand.ExecuteReader();
                     table.Load(myReader);
                     myReader.Close();

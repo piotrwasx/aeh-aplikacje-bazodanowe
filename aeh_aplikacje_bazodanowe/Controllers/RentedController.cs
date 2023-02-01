@@ -173,7 +173,7 @@ namespace aeh_aplikacje_bazodanowe.Controllers
                     myCommand.Parameters.AddWithValue("@car_model", car.car_model);
                     myCommand.Parameters.AddWithValue("@car_year", car.car_year);
                     myCommand.Parameters.AddWithValue("@car_mileage_km", car.car_mileage_km);
-                    myCommand.Parameters.AddWithValue("@car_transmisson", car.car_transmisson);
+                    myCommand.Parameters.AddWithValue("@car_transmisson", car.car_transmission);
                     myCommand.Parameters.AddWithValue("@car_motor", car.car_motor);
                     myCommand.Parameters.AddWithValue("@car_body_type", car.car_body_type);
                     myCommand.Parameters.AddWithValue("@car_rent_price_pln", car.car_rent_price_pln);

@@ -86,15 +86,7 @@ namespace aeh_aplikacje_bazodanowe.Controllers
         public JsonResult Get(int id)
         {
             string query = @"
-                            SELECT id,
-                            car_brand,
-                            car_model,
-                            car_year,
-                            car_mileage_km,
-                            car_transmission,
-                            car_motor,
-                            car_body_type,
-                            car_rent_price_pln
+                            SELECT *
                             FROM
                             dbo.Cars
                             WHERE
@@ -126,12 +118,12 @@ namespace aeh_aplikacje_bazodanowe.Controllers
         {
             string query = @"INSERT INTO dbo.Cars
                              (car_brand, car_model, car_year,
-                             car_mileage_km, car_transmisson, car_motor,
-                             car_body_type, car_rent_price_pln)
+                             car_mileage_km, car_transmission, car_motor,
+                             car_body_type, car_rent_price_pln, car_availability)
                             VALUES
                              (@car_brand, @car_model, @car_year,
-                             @car_mileage_km, @car_transmisson, @car_motor,
-                             @car_body_type, @car_rent_price_pln);";
+                             @car_mileage_km, @car_transmission, @car_motor,
+                             @car_body_type, @car_rent_price_pln, @car_availability);";
 
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("AppCon");
@@ -145,10 +137,11 @@ namespace aeh_aplikacje_bazodanowe.Controllers
                     myCommand.Parameters.AddWithValue("@car_model", car.car_model);
                     myCommand.Parameters.AddWithValue("@car_year", car.car_year);
                     myCommand.Parameters.AddWithValue("@car_mileage_km", car.car_mileage_km);
-                    myCommand.Parameters.AddWithValue("@car_transmisson", car.car_transmisson);
+                    myCommand.Parameters.AddWithValue("@car_transmission", car.car_transmission);
                     myCommand.Parameters.AddWithValue("@car_motor", car.car_motor);
                     myCommand.Parameters.AddWithValue("@car_body_type", car.car_body_type);
                     myCommand.Parameters.AddWithValue("@car_rent_price_pln", car.car_rent_price_pln);
+                    myCommand.Parameters.AddWithValue("@car_availability", car.car_availability);
                     myReader = myCommand.ExecuteReader();
                     table.Load(myReader);
                     myReader.Close();
@@ -197,7 +190,7 @@ namespace aeh_aplikacje_bazodanowe.Controllers
                             car_model = @car_model,
                             car_year = @car_year,
                             car_mileage_km = @car_mileage_km,
-                            car_transmisson = @car_transmisson,
+                            car_transmission = @car_transmission,
                             car_motor = @car_motor,
                             car_body_type = @car_body_type,
                             car_rent_price_pln = @car_rent_price_pln
@@ -218,7 +211,7 @@ namespace aeh_aplikacje_bazodanowe.Controllers
                     myCommand.Parameters.AddWithValue("@car_model", car.car_model);
                     myCommand.Parameters.AddWithValue("@car_year", car.car_year);
                     myCommand.Parameters.AddWithValue("@car_mileage_km", car.car_mileage_km);
-                    myCommand.Parameters.AddWithValue("@car_transmisson", car.car_transmisson);
+                    myCommand.Parameters.AddWithValue("@car_transmisson", car.car_transmission);
                     myCommand.Parameters.AddWithValue("@car_motor", car.car_motor);
                     myCommand.Parameters.AddWithValue("@car_body_type", car.car_body_type);
                     myCommand.Parameters.AddWithValue("@car_rent_price_pln", car.car_rent_price_pln);

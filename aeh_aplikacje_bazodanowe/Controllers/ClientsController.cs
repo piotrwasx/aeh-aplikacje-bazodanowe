@@ -100,7 +100,7 @@ namespace aeh_aplikacje_bazodanowe.Controllers
                     myCommand.Parameters.AddWithValue("@client_name", client.client_name);
                     myCommand.Parameters.AddWithValue("@client_surname", client.client_surname);
                     myCommand.Parameters.AddWithValue("@client_address", client.client_address);
-                    myCommand.Parameters.AddWithValue("@client_address", client.client_street_nr);
+                    myCommand.Parameters.AddWithValue("@client_street_nr", client.client_street_nr);
                     myCommand.Parameters.AddWithValue("@client_city", client.client_city);
                     myCommand.Parameters.AddWithValue("@client_phone_nr", client.client_phone_nr);
                     myCommand.Parameters.AddWithValue("@client_email", client.client_email);

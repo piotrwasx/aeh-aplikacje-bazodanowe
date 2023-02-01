@@ -11,5 +11,6 @@ namespace aeh_aplikacje_bazodanowe.Models
         public string motorcycle_motor { get; set; }
         public string motorcycle_body_type { get; set; }
         public int motorcycle_rent_price_pln { get; set; }
+        public Boolean motorcycle_availability { get; set; }
     }
 }
