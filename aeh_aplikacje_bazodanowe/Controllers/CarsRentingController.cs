@@ -80,14 +80,14 @@ namespace aeh_aplikacje_bazodanowe.Controllers
         }
 
         [HttpPost]
-        public JsonResult Post([FromBody] CarRenting carRenting)
+        public JsonResult Post(CarRenting carRenting)
         {
-            string query = @"INSERT INTO dbo.Car_Renting
-                             (client_id, car_id, rent_start,
-                             rent_end, rent_insurance)
-                            VALUES
-                             (@client_id, @car_id, @rent_start,
-                             @rent_end, @rent_insurance);";
+            string query = @"EXEC rentCar
+                            @client_id = @client_id
+                            ,@car_id = @car_id
+                            ,@rent_start = @rent_start
+                            ,@rent_end = @rent_end
+                            ,@rent_insurance = @rent_insurance;";
 
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("AppCon");

@@ -32,6 +32,36 @@ namespace aeh_aplikacje_bazodanowe.Controllers
                             car_model
                             FROM
                             dbo.Cars
+                            WHERE car_availability = 1
+                            ";
+
+            DataTable table = new DataTable();
+            string sqlDataSource = _configuration.GetConnectionString("AppCon");
+            SqlDataReader myReader;
+            using (SqlConnection myCon = new SqlConnection(sqlDataSource))
+            {
+                myCon.Open();
+                using (SqlCommand myCommand = new SqlCommand(query, myCon))
+                {
+                    myReader = myCommand.ExecuteReader();
+                    table.Load(myReader);
+                    myReader.Close();
+                    myCon.Close();
+                }
+            }
+
+            return new JsonResult(table);
+        }
+
+        [HttpGet("available")]
+        public JsonResult GetAvailable()
+        {
+            string query = @"
+                            SELECT DISTINCT dbo.Cars.id, dbo.Cars.car_brand, dbo.Cars.car_model, dbo.Cars.car_year, dbo.Cars.car_mileage_km, dbo.Cars.car_transmission, dbo.Cars.car_motor, dbo.Cars.car_body_type, dbo.Cars.car_rent_price_pln
+                            FROM dbo.Cars 
+                            LEFT JOIN dbo.Car_Renting ON dbo.Car_Renting.car_id = dbo.Cars.id
+                            AND dbo.Cars.car_availability = 1
+                            WHERE dbo.Car_Renting.car_id IS NULL OR DATEDIFF(day, SYSDATETIME(), dbo.Car_Renting.rent_end) < 0;
                             ";
 
             DataTable table = new DataTable();
@@ -203,5 +233,36 @@ namespace aeh_aplikacje_bazodanowe.Controllers
             return new JsonResult("Updated Successfully");
         }
 
+
+        [HttpPut("{id}")]
+        public JsonResult ChangeAvailabilityToZero(int id)
+        {
+            string query = @"
+                           UPDATE dbo.Cars
+                           SET
+                            car_availability = 0
+                           WHERE
+                            id = @car_id
+                            ";
+
+            DataTable table = new DataTable();
+            string sqlDataSource = _configuration.GetConnectionString("AppCon");
+            SqlDataReader myReader;
+            using (SqlConnection myCon = new SqlConnection(sqlDataSource))
+            {
+                myCon.Open();
+                using (SqlCommand myCommand = new SqlCommand(query, myCon))
+                {
+                    myCommand.Parameters.AddWithValue("@car_id", id);
+
+                    myReader = myCommand.ExecuteReader();
+                    table.Load(myReader);
+                    myReader.Close();
+                    myCon.Close();
+                }
+            }
+
+            return new JsonResult("Updated Successfully");
+        }
     }
 }

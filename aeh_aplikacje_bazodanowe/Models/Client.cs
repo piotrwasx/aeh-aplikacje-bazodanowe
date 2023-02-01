@@ -7,6 +7,7 @@ namespace aeh_aplikacje_bazodanowe.Models
         public string client_name { get; set; }
         public string client_surname { get; set; }
         public string client_address { get; set; }
+        public string client_street_nr { get; set; }
         public string client_city { get; set; }
         public string client_phone_nr { get; set; }
         public string client_email { get; set; }

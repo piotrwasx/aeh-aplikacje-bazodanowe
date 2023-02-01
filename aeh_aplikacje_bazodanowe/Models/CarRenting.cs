@@ -8,6 +8,6 @@ namespace aeh_aplikacje_bazodanowe.Models
         public int car_id { get; set; }
         public DateTime rent_start { get; set; }
         public DateTime rent_end { get; set; }
-        public int rent_insurance { get; set; }
+        public Boolean rent_insurance { get; set; }
     }
 }
